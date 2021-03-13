@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
+
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthenticationBloc _authenticationBloc;
   final AuthenticationServices _authenticationService;

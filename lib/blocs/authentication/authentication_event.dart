@@ -2,7 +2,6 @@ import 'package:enviro_car/models/user_model.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
-
 abstract class AuthenticationEvent extends Equatable {
   const AuthenticationEvent();
 
