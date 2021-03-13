@@ -2,9 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:enviro_car/blocs/authentication/authentication_bloc.dart';
 import 'package:enviro_car/blocs/authentication/authentication_event.dart';
 import 'package:enviro_car/services/auth/auth_services.dart';
-import 'login_event.dart';
-import 'login_state.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
+part 'login_event.dart';
+part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthenticationBloc _authenticationBloc;
   final AuthenticationServices _authenticationService;

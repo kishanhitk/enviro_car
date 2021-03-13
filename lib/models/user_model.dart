@@ -42,7 +42,12 @@ class User {
       acceptedTermsOfUseVersion: parsedJson['acceptedTermsOfUseVersion'],
     );
   }
-  static void jump() {
-    print('jump');
-  }
+  Map<String, dynamic> toJson() => {
+        "name": this.name,
+        "mail": this.mail,
+        "created": this.created,
+        "modified": this.modified,
+        "acceptedPrivacyStatementVersion": this.acceptedPrivacyStatementVersion,
+        "acceptedTermsOfUseVersion": this.acceptedTermsOfUseVersion,
+      };
 }

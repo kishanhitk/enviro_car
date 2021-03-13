@@ -1,6 +1,4 @@
-import 'package:meta/meta.dart';
-import 'package:equatable/equatable.dart';
-
+part of 'login_bloc.dart';
 
 abstract class LoginState extends Equatable{
   @override

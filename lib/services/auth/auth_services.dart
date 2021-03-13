@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:enviro_car/main.dart';
 import 'package:enviro_car/models/user_model.dart';
@@ -23,19 +24,28 @@ class AuthenticationServices {
   }
 
   Future<dynamic> login(String username, String password) async {
+    BaseOptions option = BaseOptions(sendTimeout: 20);
     try {
-      Response res = await Dio().get('$baseUrl/users/$username',
+      Response res = await Dio(option).get('$baseUrl/users/$username',
           options: Options(headers: {
             'X-User': username,
             'X-Token': password,
           }));
-      User user = User.fromJson(res.data);
-      userBox.put('user', user);
-      final userFromHive = userBox.get('user') as User;
-      print(userFromHive.name);
-      print(res);
+      if (res.statusCode == 200) {
+        User user = User.fromJson(res.data);
+        userBox.put('user', user);
+        final userFromHive = userBox.get('user') as User;
+        return userFromHive;
+      } else {
+        throw Exception(res.statusMessage);
+      }
+    } on DioError catch (e) {
+      print(e.type.toString());
+      String errorMessage = jsonDecode(e.response.toString())['message'];
+      throw Exception(errorMessage);
     } catch (e) {
       print(e);
+      throw Exception(e);
     }
   }
 

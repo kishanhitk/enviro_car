@@ -8,6 +8,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _obsecureText = true;
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -15,85 +16,138 @@ class _LoginPageState extends State<LoginPage> {
   final confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.blue.shade900,
-      body: SafeArea(
-          child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
-              child: Image.asset(
-                'assets/img_envirocar_logo_white.png',
-                width: getScreenWidth(context) * 0.7,
-              ),
-            ),
-            Text(
-              "Sign In",
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      style: TextStyle(color: Colors.white),
-                      controller: usernameController,
-                      decoration: inputDecoration('Username'),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        } else if (value.length < 6) {
-                          return 'This username is too short';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: passwordController,
-                      decoration: inputDecoration('Password'),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        } else if (value.length < 6) {
-                          return 'This username is too short';
-                        }
-                        return null;
-                      },
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          try {
-                            await AuthenticationServices().login(
-                              usernameController.text,
-                              passwordController.text,
-                            );
-                            Navigator.of(context).pushNamed('/dashboard');
-                          } catch (e) {
-                            print(e);
-                          }
-                        }
-                      },
-                      child: Text('Login'),
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
+    return Stack(
+      children: [
+        SizedBox(
+          height: getScreenHeight(context),
+          width: getScreenWidth(context),
+          child: Image.asset(
+            'assets/mapeffect.png',
+            fit: BoxFit.fill,
+          ),
         ),
-      )),
+        Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Color(0xff0165A1).withOpacity(0.9),
+          body: SafeArea(
+              child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 20),
+                  child: Image.asset(
+                    'assets/img_envirocar_logo_white.png',
+                    width: getScreenWidth(context) * 0.7,
+                  ),
+                ),
+                Text(
+                  "Sign In",
+                  style: TextStyle(color: Colors.white, fontSize: 25),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          controller: usernameController,
+                          decoration:
+                              inputDecoration('Username', Icons.person_outline),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter some text';
+                            } else if (value.length < 6) {
+                              return 'This username is too short';
+                            }
+                            return null;
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: TextFormField(
+                            obscureText: _obsecureText,
+                            controller: passwordController,
+                            decoration: inputDecoration('Password', Icons.lock)
+                                .copyWith(
+                              suffixIcon: IconButton(
+                                icon: Icon(_obsecureText
+                                    ? Icons.visibility_off
+                                    : Icons.visibility),
+                                onPressed: () {
+                                  setState(() {
+                                    _obsecureText = !_obsecureText;
+                                  });
+                                },
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter some text';
+                              } else if (value.length < 6) {
+                                return 'This password is too short';
+                              }
+                              return null;
+                            },
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        AuthButton(
+                          label: "Login",
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              await _handleLogin();
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text("Don't have an account yet?"),
+                        TextButton(
+                          onPressed: () => Navigator.pushReplacementNamed(
+                              context, '/register'),
+                          child: Text(
+                            "Register Here!",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )),
+        ),
+      ],
     );
   }
 
-  InputDecoration inputDecoration(String hintText) {
+  Future _handleLogin() async {
+    try {
+      await AuthenticationServices().login(
+        usernameController.text,
+        passwordController.text,
+      );
+      Navigator.of(context).pushReplacementNamed('/dashboard');
+    } on Exception catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+    }
+  }
+
+  InputDecoration inputDecoration(String hintText, IconData icon) {
     return InputDecoration(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25),
@@ -107,9 +161,42 @@ class _LoginPageState extends State<LoginPage> {
       fillColor: Colors.black12,
       hintText: hintText,
       prefixIcon: Icon(
-        Icons.person,
+        icon,
         color: Colors.white,
       ),
+    );
+  }
+}
+
+class AuthButton extends StatelessWidget {
+  final Function onPressed;
+  final String label;
+  const AuthButton({
+    Key key,
+    @required this.onPressed,
+    @required this.label,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+          EdgeInsets.symmetric(
+            horizontal: 100,
+            vertical: 12,
+          ),
+        ),
+        shape: MaterialStateProperty.all<OutlinedBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+        ),
+        backgroundColor: MaterialStateProperty.all(Color(0xff01456C)),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      ),
+      child: Text(label),
+      onPressed: onPressed,
     );
   }
 }

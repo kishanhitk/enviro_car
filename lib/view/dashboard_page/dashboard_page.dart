@@ -13,9 +13,10 @@ class DashboardPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Welcome ${user.name}"),
+              Text("Your email is ${user.mail}"),
               ElevatedButton(
-                  onPressed: () {
-                    userBox.clear();
+                  onPressed: () async {
+                    await userBox.clear();
                     Navigator.of(context).pushReplacementNamed('/');
                   },
                   child: Text("Logout"))
