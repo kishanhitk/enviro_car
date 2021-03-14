@@ -18,6 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final usernameController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -63,10 +64,15 @@ class _RegisterPageState extends State<RegisterPage> {
                               decoration: inputDecoration(
                                   'Username', Icons.person_outline),
                               validator: (value) {
+                                RegExp usernameRegExp =
+                                    RegExp(r'^[_A-Za-z0-9-]{4,}$');
+
                                 if (value.isEmpty) {
                                   return 'Please enter some text';
-                                } else if (value.length < 6) {
+                                } else if (value.length < 4) {
                                   return 'This username is too short';
+                                } else if (!usernameRegExp.hasMatch(value)) {
+                                  return 'Username should only contain alphanumeric values';
                                 }
                                 return null;
                               },
@@ -167,31 +173,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   )
                                 : AuthButton(
                                     onPressed: () async {
-                                      setState(() {
-                                        _isLoading = true;
-                                      });
                                       if (_formKey.currentState.validate()) {
-                                        try {
-                                          await AuthenticationServices()
-                                              .register(
-                                            usernameController.text,
-                                            passwordController.text,
-                                            emailController.text,
-                                          );
-                                          await showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return RegistrationSuccessDialog();
-                                            },
-                                          );
-                                          Navigator.of(context).pushNamed('/');
-                                        } catch (e) {
-                                          print(e);
-                                        }
+                                        _handleRegisterButton();
                                       }
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
                                     },
                                     label: 'Register',
                                   ),
@@ -222,6 +206,41 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ],
     );
+  }
+
+  Future _handleRegisterButton() async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      await AuthenticationServices().register(
+        usernameController.text,
+        passwordController.text,
+        emailController.text,
+      );
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return RegistrationSuccessDialog();
+        },
+      );
+      Navigator.of(context).pushNamed('/');
+    } on Exception catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   InputDecoration inputDecoration(String hintText, IconData prefixIcon) {

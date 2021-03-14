@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:enviro_car/main.dart';
 import 'package:enviro_car/models/user_model.dart';
+import 'package:flutter/material.dart';
 
 class AuthenticationServices {
   static String baseUrl = 'https://envirocar.org/api/dev';
+
   Future<dynamic> register(
       String username, String password, String mail) async {
     try {
@@ -15,11 +17,12 @@ class AuthenticationServices {
         "acceptedPrivacy": true,
         "acceptedTerms": true
       });
-      print(res.statusMessage);
-      print(res);
+      debugPrint(res.toString());
+    } on DioError catch (e) {
+      String errorMessage = jsonDecode(e.response.toString())['message'];
+      throw Exception(errorMessage);
     } catch (e) {
-      print("Something Went Wring");
-      return e;
+      throw Exception(e);
     }
   }
 
@@ -40,11 +43,9 @@ class AuthenticationServices {
         throw Exception(res.statusMessage);
       }
     } on DioError catch (e) {
-      print(e.type.toString());
       String errorMessage = jsonDecode(e.response.toString())['message'];
       throw Exception(errorMessage);
     } catch (e) {
-      print(e);
       throw Exception(e);
     }
   }

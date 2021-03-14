@@ -160,6 +160,12 @@ class _LoginPageState extends State<LoginPage> {
           content: Text(e.toString()),
         ),
       );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
     }
     setState(() {
       isLoading = false;
