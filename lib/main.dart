@@ -1,4 +1,5 @@
 import 'package:enviro_car/blocs/authentication/authentication_bloc.dart';
+import 'package:enviro_car/consts/colors.dart';
 import 'package:enviro_car/models/user_model.dart';
 import 'package:enviro_car/services/auth/auth_services.dart';
 import 'package:enviro_car/view/dashboard_page/dashboard_page.dart';
@@ -7,6 +8,7 @@ import 'package:enviro_car/view/login_page/login_page.dart';
 import 'package:enviro_car/view/register_page/register_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -25,6 +27,11 @@ Future _initHive() async {
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initHive();
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: kThemeBlueColor,
+    ),
+  );
   runApp(MyApp());
 }
 
@@ -46,6 +53,8 @@ class _MyAppState extends State<MyApp> {
         },
         child: MaterialApp(
           theme: ThemeData(
+            primaryColor: kThemeBlueColor,
+            canvasColor: kThemeBlueColor,
             textTheme: GoogleFonts.latoTextTheme(
               Theme.of(context).textTheme,
             ),
