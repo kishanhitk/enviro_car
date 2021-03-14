@@ -32,7 +32,7 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapAppLoadedToState(AppLoaded event) async* {
     yield AuthenticationLoading();
     try {
-      await Future.delayed(Duration(milliseconds: 500)); // a simulated delay
+      await Future.delayed(const Duration(milliseconds: 500)); // a simulated delay
       final currentUser = _authenticationService.getCurrentUser();
 
       if (currentUser != null) {
@@ -42,7 +42,7 @@ class AuthenticationBloc
       }
     } catch (e) {
       yield AuthenticationFailure(
-          message: e.message ?? 'An unknown error occurred');
+          message: e.message.toString() ?? 'An unknown error occurred');
     }
   }
 

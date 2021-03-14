@@ -32,13 +32,14 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
     return User(
-      name: parsedJson['name'],
-      mail: parsedJson['mail'],
-      created: parsedJson['created'],
-      modified: parsedJson['modified'],
+      name: parsedJson['name'] as String,
+      mail: parsedJson['mail'] as String,
+      created: parsedJson['created'] as String,
+      modified: parsedJson['modified'] as String,
       acceptedPrivacyStatementVersion:
-          parsedJson['acceptedPrivacyStatementVersion'],
-      acceptedTermsOfUseVersion: parsedJson['acceptedTermsOfUseVersion'],
+          parsedJson['acceptedPrivacyStatementVersion'] as String,
+      acceptedTermsOfUseVersion:
+          parsedJson['acceptedTermsOfUseVersion'] as String,
     );
   }
   Map<String, dynamic> toJson() => {

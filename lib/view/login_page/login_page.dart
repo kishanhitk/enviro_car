@@ -221,7 +221,7 @@ class AuthButton extends StatelessWidget {
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
       ),
       child: Text(label),
-      onPressed: onPressed,
+      onPressed: () => onPressed(),
     );
   }
 }

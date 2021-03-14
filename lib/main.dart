@@ -24,11 +24,12 @@ Future _initHive() async {
   userBox = await Hive.openBox('userBox');
 }
 
+
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initHive();
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       statusBarColor: kThemeBlueColor,
     ),
   );

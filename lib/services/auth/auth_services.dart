@@ -19,14 +19,15 @@ class AuthenticationServices {
       });
       debugPrint(res.toString());
     } on DioError catch (e) {
-      String errorMessage = jsonDecode(e.response.toString())['message'];
+      String errorMessage =
+          jsonDecode(e.response.toString())['message'] as String;
       throw Exception(errorMessage);
     } catch (e) {
       throw Exception(e);
     }
   }
 
-  Future<dynamic> login(String username, String password) async {
+  Future<User> login(String username, String password) async {
     BaseOptions option = BaseOptions(sendTimeout: 20);
     try {
       Response res = await Dio(option).get('$baseUrl/users/$username',
@@ -35,7 +36,7 @@ class AuthenticationServices {
             'X-Token': password,
           }));
       if (res.statusCode == 200) {
-        User user = User.fromJson(res.data);
+        User user = User.fromJson(res.data as Map<String, dynamic>);
         userBox.put('user', user);
         final userFromHive = userBox.get('user') as User;
         return userFromHive;
@@ -43,7 +44,8 @@ class AuthenticationServices {
         throw Exception(res.statusMessage);
       }
     } on DioError catch (e) {
-      String errorMessage = jsonDecode(e.response.toString())['message'];
+      String errorMessage =
+          jsonDecode(e.response.toString())['message'] as String;
       throw Exception(errorMessage);
     } catch (e) {
       throw Exception(e);
