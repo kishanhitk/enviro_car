@@ -2,6 +2,7 @@ import 'package:enviro_car/blocs/authentication/authentication_bloc.dart';
 import 'package:enviro_car/consts/colors.dart';
 import 'package:enviro_car/models/user_model.dart';
 import 'package:enviro_car/services/auth/auth_services.dart';
+import 'package:enviro_car/view/bluetooth_page/bluetooth_page.dart';
 import 'package:enviro_car/view/dashboard_page/dashboard_page.dart';
 import 'package:enviro_car/view/landing_page/landing_page.dart';
 import 'package:enviro_car/view/login_page/login_page.dart';
@@ -65,6 +66,7 @@ class _MyAppState extends State<MyApp> {
             '/register': (ctx) => RegisterPage(),
             '/login': (ctx) => LoginPage(),
             '/dashboard': (ctx) => DashboardPage(),
+            '/bluetooth': (_) => BluetoothPage()
           },
         ),
       ),
