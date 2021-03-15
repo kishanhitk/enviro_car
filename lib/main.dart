@@ -43,31 +43,21 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider<AuthenticationServices>(
-      create: (context) => AuthenticationServices(),
-      child: BlocProvider<AuthenticationBloc>(
-        create: (context) {
-          final authService =
-              RepositoryProvider.of<AuthenticationServices>(context);
-          return AuthenticationBloc(authService)..add(AppLoaded());
-        },
-        child: MaterialApp(
-          theme: ThemeData(
-            primaryColor: kThemeBlueColor,
-            canvasColor: kThemeBlueColor,
-            textTheme: GoogleFonts.latoTextTheme(
-              Theme.of(context).textTheme,
-            ),
-          ),
-          initialRoute: '/',
-          routes: {
-            '/': (ctx) => LandingPage(),
-            '/register': (ctx) => RegisterPage(),
-            '/login': (ctx) => LoginPage(),
-            '/dashboard': (ctx) => DashboardPage(),
-          },
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: kThemeBlueColor,
+        canvasColor: kThemeBlueColor,
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
         ),
       ),
+      initialRoute: '/',
+      routes: {
+        '/': (ctx) => LandingPage(),
+        '/register': (ctx) => RegisterPage(),
+        '/login': (ctx) => LoginPage(),
+        '/dashboard': (ctx) => DashboardPage(),
+      },
     );
   }
 
