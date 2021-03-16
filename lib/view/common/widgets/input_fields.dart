@@ -96,6 +96,7 @@ class _ConfirmCreatedPasswordInputState
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: _hiddenPassword,
       decoration: InputDecoration(
         hintText: "Confirm Password",
         prefixIcon: Icon(
@@ -103,12 +104,16 @@ class _ConfirmCreatedPasswordInputState
           color: Colors.white,
         ),
         suffixIcon: IconButton(
-            icon: Icon(Icons.visibility),
-            onPressed: () {
-              setState(() {
-                _hiddenPassword = !_hiddenPassword;
-              });
-            }),
+          icon: Icon(
+            _hiddenPassword ? Icons.visibility : Icons.visibility_off,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            setState(() {
+              _hiddenPassword = !_hiddenPassword;
+            });
+          },
+        ),
       ),
       style: TextStyle(color: Colors.white),
       controller: widget.confirmPasswordController,
@@ -142,18 +147,23 @@ class _CreatePasswordInputState extends State<CreatePasswordInput> {
     return TextFormField(
       controller: widget.passwordController,
       decoration: InputDecoration(
+        errorMaxLines: 2,
         hintText: "Password",
         prefixIcon: Icon(
           Icons.lock,
           color: Colors.white,
         ),
         suffixIcon: IconButton(
-            icon: Icon(Icons.visibility),
-            onPressed: () {
-              setState(() {
-                _hiddenPassword = !_hiddenPassword;
-              });
-            }),
+          icon: Icon(
+            _hiddenPassword ? Icons.visibility : Icons.visibility_off,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            setState(() {
+              _hiddenPassword = !_hiddenPassword;
+            });
+          },
+        ),
       ),
       validator: (value) {
         RegExp _passwordRegex =
