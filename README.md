@@ -1,16 +1,32 @@
-# enviro_car
+# enviroCar
 
-A new Flutter project.
+## Setup
+Prerequisite:
 
-## Getting Started
+* [Git](https://git-scm.com/)
+* [Flutter SDK](https://flutter.dev/docs/get-started/install)
 
-This project is a starting point for a Flutter application.
+1. Clone the repo.
 
-A few resources to get you started if this is your first Flutter project:
+   ```bash
+   git clone https://github.com/kishanhitk/enviro_car
+   ```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+2. In the root project directory, run this command to download packages.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   ```bash
+   flutter pub get
+   ```
+
+3. Connect an Android Emulator or a physical Android device via ADB and run this command to run the debug version of the app on the connected device.
+
+   ```bash
+   flutter run
+   ```
+
+4. (Optional) Build release APK. This will create a fat APK which you can install directly on your Android device. 
+
+   ```bash
+   flutter build apk --release
+   ```
+
