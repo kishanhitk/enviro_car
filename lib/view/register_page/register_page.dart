@@ -1,7 +1,9 @@
 import 'package:enviro_car/consts/colors.dart';
 import 'package:enviro_car/services/auth/auth_services.dart';
 import 'package:enviro_car/utils/media_query.dart';
-import 'package:enviro_car/view/login_page/login_page.dart';
+import 'package:enviro_car/view/common/widgets/buttons.dart';
+import 'package:enviro_car/view/common/widgets/dialogs.dart';
+import 'package:enviro_car/view/common/widgets/input_fields.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -10,14 +12,13 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  bool _isLoading = false;
-  bool _hiddenPassword = true;
-  bool _hiddenConfirmPassword = true;
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final usernameController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,110 +59,28 @@ class _RegisterPageState extends State<RegisterPage> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            TextFormField(
-                              style: TextStyle(color: Colors.white),
-                              controller: usernameController,
-                              decoration: inputDecoration(
-                                  'Username', Icons.person_outline),
-                              validator: (value) {
-                                RegExp usernameRegExp =
-                                    RegExp(r'^[_A-Za-z0-9-]{4,}$');
-
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                } else if (value.length < 4) {
-                                  return 'This username is too short';
-                                } else if (!usernameRegExp.hasMatch(value)) {
-                                  return 'Username should only contain alphanumeric values';
-                                }
-                                return null;
-                              },
+                            UsernameInput(
+                              usernameController: usernameController,
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            TextFormField(
-                              controller: emailController,
-                              decoration:
-                                  inputDecoration('E-Mail', Icons.email),
-                              style: TextStyle(color: Colors.white),
-                              validator: (value) {
-                                RegExp regExp = RegExp(
-                                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                } else if (!regExp.hasMatch(value)) {
-                                  return 'Please enter a valid email';
-                                }
-                                return null;
-                              },
+                            EmailInput(
+                              emailcontroller: emailController,
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            TextFormField(
-                              controller: passwordController,
-                              decoration:
-                                  inputDecoration('Password', Icons.lock)
-                                      .copyWith(
-                                errorMaxLines: 2,
-                                suffixIcon: IconButton(
-                                  icon: Icon(_hiddenPassword
-                                      ? Icons.visibility_off
-                                      : Icons.visibility),
-                                  onPressed: () {
-                                    setState(() {
-                                      _hiddenPassword = !_hiddenPassword;
-                                    });
-                                  },
-                                ),
-                              ),
-                              validator: (value) {
-                                RegExp _passwordRegex = RegExp(
-                                    r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$');
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                } else if (value.length < 6) {
-                                  return 'Password should containe atleast 6 characters.';
-                                } else if (!_passwordRegex.hasMatch(value)) {
-                                  return 'Password should contain at least one uppercase, one lowercase and one numeric value.';
-                                }
-                                return null;
-                              },
-                              style: TextStyle(color: Colors.white),
-                              obscureText: _hiddenPassword,
+                            CreatePasswordInput(
+                              passwordController: passwordController,
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            TextFormField(
-                              obscureText: _hiddenConfirmPassword,
-                              style: TextStyle(color: Colors.white),
-                              controller: confirmPasswordController,
-                              decoration: inputDecoration(
-                                      'Confirm Password', Icons.lock)
-                                  .copyWith(
-                                suffixIcon: IconButton(
-                                  icon: Icon(_hiddenConfirmPassword
-                                      ? Icons.visibility_off
-                                      : Icons.visibility),
-                                  onPressed: () {
-                                    setState(() {
-                                      _hiddenConfirmPassword =
-                                          !_hiddenConfirmPassword;
-                                    });
-                                  },
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                } else if (value != passwordController.text) {
-                                  return 'Both passwords are not same';
-                                }
-                                return null;
-                              },
-                            ),
+                            ConfirmCreatedPasswordInput(
+                                confirmPasswordController:
+                                    confirmPasswordController,
+                                passwordController: passwordController),
                             SizedBox(
                               height: 10,
                             ),
@@ -241,48 +160,5 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       _isLoading = false;
     });
-  }
-
-  InputDecoration inputDecoration(String hintText, IconData prefixIcon) {
-    return InputDecoration(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(25),
-        borderSide: BorderSide.none,
-      ),
-      isDense: true,
-      hintStyle: TextStyle(
-        color: Colors.white38,
-      ),
-      filled: true,
-      fillColor: Colors.black12,
-      hintText: hintText,
-      prefixIcon: Icon(
-        prefixIcon,
-        color: Colors.white,
-      ),
-    );
-  }
-}
-
-class RegistrationSuccessDialog extends StatelessWidget {
-  const RegistrationSuccessDialog({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: new Text("You are just one step away...."),
-      content: new Text(
-        "You are just one step away from activating your account on enviroCar. Please check your mails in order to complete the registration",
-      ),
-      actions: [
-        TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("OK"))
-      ],
-    );
   }
 }

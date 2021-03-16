@@ -1,6 +1,6 @@
 import 'package:enviro_car/main.dart';
 import 'package:enviro_car/models/user_model.dart';
-import 'package:enviro_car/view/login_page/login_page.dart';
+import 'package:enviro_car/view/common/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatelessWidget {
