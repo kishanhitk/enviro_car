@@ -21,6 +21,12 @@ class DashboardPage extends StatelessWidget {
                   Navigator.of(context).pushReplacementNamed('/');
                 },
                 label: "Logout",
+              ),
+              AuthButton(
+                onPressed: () async {
+                  Navigator.of(context).pushNamed('/bluetooth');
+                },
+                label: "Bluetooth Page",
               )
             ],
           ),
