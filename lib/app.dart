@@ -1,4 +1,5 @@
 import 'package:enviro_car/consts/colors.dart';
+import 'package:enviro_car/view/bluetooth_page/bluetooth_page.dart';
 import 'package:enviro_car/view/dashboard_page/dashboard_page.dart';
 import 'package:enviro_car/view/landing_page/landing_page.dart';
 import 'package:enviro_car/view/login_page/login_page.dart';
@@ -57,4 +58,5 @@ Map<String, Widget Function(dynamic)> routes = {
   '/login': (ctx) => LoginPage(),
   '/register': (ctx) => RegisterPage(),
   '/dashboard': (ctx) => DashboardPage(),
+  '/bluetooth': (ctx) => BluetoothPage()
 };
