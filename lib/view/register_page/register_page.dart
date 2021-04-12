@@ -92,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   )
                                 : AuthButton(
                                     onPressed: () async {
-                                      if (_formKey.currentState.validate()) {
+                                      if (_formKey.currentState!.validate()) {
                                         _handleRegisterButton();
                                       }
                                     },

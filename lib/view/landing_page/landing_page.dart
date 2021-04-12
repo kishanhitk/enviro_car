@@ -18,7 +18,7 @@ class LandingPage extends StatelessWidget {
 
 class LandingPageView extends StatelessWidget {
   const LandingPageView({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

@@ -5,22 +5,22 @@ part 'user_model.g.dart';
 @HiveType(typeId: 0)
 class User {
   @HiveField(0)
-  final String name;
+  final String? name;
 
   @HiveField(1)
-  final String mail;
+  final String? mail;
 
   @HiveField(2)
-  final String created;
+  final String? created;
 
   @HiveField(3)
-  final String modified;
+  final String? modified;
 
   @HiveField(4)
-  final String acceptedPrivacyStatementVersion;
+  final String? acceptedPrivacyStatementVersion;
 
   @HiveField(5)
-  final String acceptedTermsOfUseVersion;
+  final String? acceptedTermsOfUseVersion;
 
   User(
       {this.name,

@@ -5,9 +5,9 @@ class AuthButton extends StatelessWidget {
   final Function onPressed;
   final String label;
   const AuthButton({
-    Key key,
-    @required this.onPressed,
-    @required this.label,
+    Key? key,
+    required this.onPressed,
+    required this.label,
   }) : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class AuthButton extends StatelessWidget {
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
       ),
       child: Text(label),
-      onPressed: onPressed,
+      onPressed: onPressed as void Function()?,
     );
   }
 }

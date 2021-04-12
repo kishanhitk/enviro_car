@@ -74,10 +74,10 @@ class OtherPage extends StatelessWidget {
 }
 
 class ListTileOther extends StatelessWidget {
-  final String label;
-  final IconData icon;
+  final String? label;
+  final IconData? icon;
   const ListTileOther({
-    Key key,
+    Key? key,
     this.label,
     this.icon,
   }) : super(key: key);
@@ -96,7 +96,7 @@ class ListTileOther extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 15.0),
             child: Text(
-              label,
+              label!,
               style: TextStyle(
                 fontSize: 20,
                 color: label == "Close enviroCar" ? Colors.red : kLightBlack,

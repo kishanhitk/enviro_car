@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class RegistrationSuccessDialog extends StatelessWidget {
   const RegistrationSuccessDialog({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
