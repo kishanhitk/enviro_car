@@ -6,6 +6,8 @@ import 'package:enviro_car/services/tracks/track_services.dart';
 import 'package:flutter/material.dart';
 
 class MyTrackPage extends StatelessWidget {
+  static const String routename = '/my_tracks';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

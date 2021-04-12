@@ -4,9 +4,12 @@ import 'package:enviro_car/utils/media_query.dart';
 import 'package:enviro_car/view/common/widgets/buttons.dart';
 import 'package:enviro_car/view/common/widgets/dialogs.dart';
 import 'package:enviro_car/view/common/widgets/input_fields.dart';
+import 'package:enviro_car/view/landing_page/landing_page.dart';
+import 'package:enviro_car/view/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
+  static const String routeName = '/register';
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -104,7 +107,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             Text("Already have an account"),
                             TextButton(
                               onPressed: () => Navigator.pushReplacementNamed(
-                                  context, '/login'),
+                                context,
+                                LoginPage.routename,
+                              ),
                               child: Text(
                                 "Sign in Here!",
                                 style: TextStyle(
@@ -143,7 +148,9 @@ class _RegisterPageState extends State<RegisterPage> {
           return RegistrationSuccessDialog();
         },
       );
-      Navigator.of(context).pushNamed('/');
+      Navigator.of(context).pushNamed(
+        LandingPage.routename,
+      );
     } on Exception catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

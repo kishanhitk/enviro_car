@@ -1,9 +1,11 @@
 import 'package:enviro_car/consts/colors.dart';
+import 'package:enviro_car/view/landing_page/landing_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
 
 class OtherPage extends StatelessWidget {
+  static const String routename = '/others';
   Future<void> _logout() async {
     await userBox.clear();
   }
@@ -69,8 +71,8 @@ class OtherPage extends StatelessWidget {
             label: "Logout",
             onPressed: () async {
               await _logout();
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/', (route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  LandingPage.routename, (route) => false);
             },
           ),
           Divider(

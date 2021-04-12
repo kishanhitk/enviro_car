@@ -3,9 +3,12 @@ import 'package:enviro_car/main.dart';
 import 'package:enviro_car/utils/media_query.dart';
 import 'package:enviro_car/view/common/widgets/buttons.dart';
 import 'package:enviro_car/view/core/base_widget.dart';
+import 'package:enviro_car/view/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatelessWidget {
+  static const String routename = '/landing';
+
   @override
   Widget build(BuildContext context) {
     if (userBox.get('user') != null) {
@@ -49,7 +52,8 @@ class LandingPageView extends StatelessWidget {
               ),
               AuthButton(
                 label: "Get Started",
-                onPressed: () => Navigator.of(context).pushNamed('/login'),
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(LoginPage.routename),
               ),
             ],
           ),

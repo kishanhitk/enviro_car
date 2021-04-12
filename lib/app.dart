@@ -4,6 +4,8 @@ import 'package:enviro_car/view/core/base_widget.dart';
 import 'package:enviro_car/view/dashboard_page/dashboard_page.dart';
 import 'package:enviro_car/view/landing_page/landing_page.dart';
 import 'package:enviro_car/view/login_page/login_page.dart';
+import 'package:enviro_car/view/my_tracks_page/my_tracks_page.dart';
+import 'package:enviro_car/view/others_page/others_page.dart';
 import 'package:enviro_car/view/register_page/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,18 +50,18 @@ ThemeData themeData = ThemeData(
       color: Colors.white,
     ),
   ),
-  // primaryColor: kThemeBlueColor,
-  // canvasColor: kThemeBlueColor,
   textTheme: GoogleFonts.latoTextTheme(),
 );
 
-String initialRoute = '/';
+String initialRoute = LandingPage.routename;
 
 Map<String, Widget Function(dynamic)> routes = {
-  '/': (ctx) => LandingPage(),
-  '/login': (ctx) => LoginPage(),
-  '/register': (ctx) => RegisterPage(),
-  '/dashboard': (ctx) => DashboardPage(),
-  '/bluetooth': (ctx) => BluetoothPage(),
-  '/base': (ctx) => BaseWidget()
+  LandingPage.routename: (_) => LandingPage(),
+  LoginPage.routename: (_) => LoginPage(),
+  RegisterPage.routeName: (_) => RegisterPage(),
+  DashboardPage.routename: (_) => DashboardPage(),
+  BluetoothPage.routename: (_) => BluetoothPage(),
+  BaseWidget.routeName: (_) => BaseWidget(),
+  MyTrackPage.routename: (_) => MyTrackPage(),
+  OtherPage.routename: (_) => OtherPage(),
 };

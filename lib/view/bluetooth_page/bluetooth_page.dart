@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
 class BluetoothPage extends StatelessWidget {
+  static const String routename = '/bluetooth';
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<BluetoothState>(

@@ -1,10 +1,13 @@
 import 'package:enviro_car/consts/colors.dart';
 import 'package:enviro_car/main.dart';
 import 'package:enviro_car/models/user_model.dart';
+import 'package:enviro_car/view/bluetooth_page/bluetooth_page.dart';
 import 'package:enviro_car/view/common/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatelessWidget {
+  static const String routename = '/dashboard';
+
   final user = userBox.get('user') as User?;
 
   @override
@@ -60,7 +63,7 @@ class DashboardPage extends StatelessWidget {
               Spacer(),
               AuthButton(
                 onPressed: () async {
-                  Navigator.of(context).pushNamed('/bluetooth');
+                  Navigator.of(context).pushNamed(BluetoothPage.routename);
                 },
                 label: "Bluetooth Page",
               ),
