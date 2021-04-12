@@ -1,7 +1,13 @@
 import 'package:enviro_car/consts/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
+
 class OtherPage extends StatelessWidget {
+  Future<void> _logout() async {
+    await userBox.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +27,7 @@ class OtherPage extends StatelessWidget {
           ListTileOther(
             label: "Log Book",
             icon: Icons.book,
+            onPressed: null,
           ),
           Divider(
             height: 1,
@@ -28,6 +35,7 @@ class OtherPage extends StatelessWidget {
           ListTileOther(
             icon: Icons.settings,
             label: "Settings",
+            onPressed: null,
           ),
           Divider(
             height: 1,
@@ -35,6 +43,7 @@ class OtherPage extends StatelessWidget {
           ListTileOther(
             icon: Icons.help_outline,
             label: "Help",
+            onPressed: null,
           ),
           Divider(
             height: 1,
@@ -42,6 +51,7 @@ class OtherPage extends StatelessWidget {
           ListTileOther(
             icon: Icons.bug_report,
             label: "Report Issue",
+            onPressed: null,
           ),
           Divider(
             height: 1,
@@ -49,6 +59,7 @@ class OtherPage extends StatelessWidget {
           ListTileOther(
             icon: Icons.star,
             label: "Rate Us",
+            onPressed: null,
           ),
           Divider(
             height: 1,
@@ -56,6 +67,11 @@ class OtherPage extends StatelessWidget {
           ListTileOther(
             icon: Icons.logout,
             label: "Logout",
+            onPressed: () async {
+              await _logout();
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/', (route) => false);
+            },
           ),
           Divider(
             height: 1,
@@ -63,6 +79,7 @@ class OtherPage extends StatelessWidget {
           ListTileOther(
             icon: Icons.power_settings_new_outlined,
             label: "Close enviroCar",
+            onPressed: null,
           ),
           Divider(
             height: 1,
@@ -74,36 +91,45 @@ class OtherPage extends StatelessWidget {
 }
 
 class ListTileOther extends StatelessWidget {
+  final Function? onPressed;
   final String? label;
   final IconData? icon;
   const ListTileOther({
     Key? key,
     this.label,
     this.icon,
+    this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            size: 30,
-            color: label == "Close enviroCar" ? Colors.red : Colors.black,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15.0),
-            child: Text(
-              label!,
-              style: TextStyle(
-                fontSize: 20,
-                color: label == "Close enviroCar" ? Colors.red : kLightBlack,
+    return InkWell(
+      onTap: () {
+        if (onPressed != null) {
+          onPressed!();
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 30,
+              color: label == "Close enviroCar" ? Colors.red : Colors.black,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Text(
+                label!,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: label == "Close enviroCar" ? Colors.red : kLightBlack,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
