@@ -5,7 +5,7 @@ import 'package:enviro_car/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 class AuthenticationServices {
-  static String baseUrl = 'https://envirocar.org/api/dev';
+  static String baseUrl = 'https://envirocar.org/api/stable';
 
   Future<dynamic> register(
       String username, String password, String mail) async {
@@ -36,6 +36,7 @@ class AuthenticationServices {
           }));
       if (res.statusCode == 200) {
         User user = User.fromJson(res.data);
+        user.token = password;
         userBox.put('user', user);
         final userFromHive = userBox.get('user') as User?;
         return userFromHive;

@@ -23,13 +23,14 @@ class UserAdapter extends TypeAdapter<User> {
       modified: fields[3] as String?,
       acceptedPrivacyStatementVersion: fields[4] as String?,
       acceptedTermsOfUseVersion: fields[5] as String?,
+      token: fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(4)
       ..write(obj.acceptedPrivacyStatementVersion)
       ..writeByte(5)
-      ..write(obj.acceptedTermsOfUseVersion);
+      ..write(obj.acceptedTermsOfUseVersion)
+      ..writeByte(6)
+      ..write(obj.token);
   }
 
   @override

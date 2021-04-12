@@ -96,8 +96,8 @@ class ScanResultTile extends StatelessWidget {
         onPressed: (result!.advertisementData.connectable) ? onTap : null,
       ),
       children: <Widget>[
-        _buildAdvRow(
-            context, 'Complete Local Name', result!.advertisementData.localName),
+        _buildAdvRow(context, 'Complete Local Name',
+            result!.advertisementData.localName),
         _buildAdvRow(context, 'Tx Power Level',
             '${result!.advertisementData.txPowerLevel ?? 'N/A'}'),
         _buildAdvRow(
@@ -110,7 +110,9 @@ class ScanResultTile extends StatelessWidget {
             context,
             'Service UUIDs',
             (result!.advertisementData.serviceUuids.isNotEmpty)
-                ? result!.advertisementData.serviceUuids.join(', ').toUpperCase()
+                ? result!.advertisementData.serviceUuids
+                    .join(', ')
+                    .toUpperCase()
                 : 'N/A'),
         _buildAdvRow(context, 'Service Data',
             getNiceServiceData(result!.advertisementData.serviceData) ?? 'N/A'),
@@ -136,10 +138,8 @@ class ServiceTile extends StatelessWidget {
           children: <Widget>[
             Text('Service'),
             Text('0x${service!.uuid.toString().toUpperCase().substring(4, 8)}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(color: Theme.of(context).textTheme.caption!.color))
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                    color: Theme.of(context).textTheme.caption!.color))
           ],
         ),
         children: characteristicTiles!,
