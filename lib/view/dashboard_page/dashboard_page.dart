@@ -5,7 +5,7 @@ import 'package:enviro_car/view/common/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatelessWidget {
-  final user = userBox.get('user') as User;
+  final user = userBox.get('user') as User?;
   Future<void> _logout() async {
     await userBox.clear();
   }
@@ -37,8 +37,8 @@ class DashboardPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Welcome ${user.name}"),
-              Text("Your email is ${user.mail}"),
+              Text("Welcome ${user!.name}"),
+              Text("Your email is ${user!.mail}"),
               AuthButton(
                 onPressed: () async {
                   Navigator.of(context).pushNamed('/bluetooth');

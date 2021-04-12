@@ -19,7 +19,7 @@ class AuthenticationServices {
       });
       debugPrint(res.toString());
     } on DioError catch (e) {
-      String errorMessage = jsonDecode(e.response.toString())['message'];
+      String? errorMessage = jsonDecode(e.response.toString())['message'];
       throw Exception(errorMessage);
     } catch (e) {
       throw Exception(e);
@@ -37,21 +37,21 @@ class AuthenticationServices {
       if (res.statusCode == 200) {
         User user = User.fromJson(res.data);
         userBox.put('user', user);
-        final userFromHive = userBox.get('user') as User;
+        final userFromHive = userBox.get('user') as User?;
         return userFromHive;
       } else {
         throw Exception(res.statusMessage);
       }
     } on DioError catch (e) {
-      String errorMessage = jsonDecode(e.response.toString())['message'];
+      String? errorMessage = jsonDecode(e.response.toString())['message'];
       throw Exception(errorMessage);
     } catch (e) {
       throw Exception(e);
     }
   }
 
-  User getCurrentUser() {
-    return userBox.get('user') as User;
+  User? getCurrentUser() {
+    return userBox.get('user') as User?;
   }
 
   Future<void> signOut() async {

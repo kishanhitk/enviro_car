@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                                 : AuthButton(
                                     label: "Login",
                                     onPressed: () async {
-                                      if (_formKey.currentState.validate()) {
+                                      if (_formKey.currentState!.validate()) {
                                         await _handleLogin();
                                       }
                                     },

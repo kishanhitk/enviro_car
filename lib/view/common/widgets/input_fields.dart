@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PasswordInput extends StatefulWidget {
-  final TextEditingController passwordController;
+  final TextEditingController? passwordController;
 
-  const PasswordInput({Key key, this.passwordController}) : super(key: key);
+  const PasswordInput({Key? key, this.passwordController}) : super(key: key);
   @override
   _PasswordInputState createState() => _PasswordInputState();
 }
@@ -33,7 +33,7 @@ class _PasswordInputState extends State<PasswordInput> {
           ),
         ),
         validator: (value) {
-          if (value.isEmpty) {
+          if (value!.isEmpty) {
             return 'Please enter some text';
           } else if (value.length < 6) {
             return 'This password is too short';
@@ -47,9 +47,9 @@ class _PasswordInputState extends State<PasswordInput> {
 }
 
 class UsernameInput extends StatelessWidget {
-  final TextEditingController usernameController;
+  final TextEditingController? usernameController;
 
-  const UsernameInput({Key key, this.usernameController}) : super(key: key);
+  const UsernameInput({Key? key, this.usernameController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -63,7 +63,7 @@ class UsernameInput extends StatelessWidget {
         ),
       ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'Please enter some text';
         } else if (value.length < 6) {
           return 'This username is too short';
@@ -76,9 +76,9 @@ class UsernameInput extends StatelessWidget {
 
 class ConfirmCreatedPasswordInput extends StatefulWidget {
   const ConfirmCreatedPasswordInput({
-    Key key,
-    @required this.confirmPasswordController,
-    @required this.passwordController,
+    Key? key,
+    required this.confirmPasswordController,
+    required this.passwordController,
   }) : super(key: key);
 
   final TextEditingController confirmPasswordController;
@@ -118,7 +118,7 @@ class _ConfirmCreatedPasswordInputState
       style: TextStyle(color: Colors.white),
       controller: widget.confirmPasswordController,
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'Please enter some text';
         } else if (value != widget.passwordController.text) {
           return 'Both passwords are not same';
@@ -130,9 +130,9 @@ class _ConfirmCreatedPasswordInputState
 }
 
 class CreatePasswordInput extends StatefulWidget {
-  final TextEditingController passwordController;
+  final TextEditingController? passwordController;
   const CreatePasswordInput({
-    Key key,
+    Key? key,
     this.passwordController,
   }) : super(key: key);
 
@@ -168,7 +168,7 @@ class _CreatePasswordInputState extends State<CreatePasswordInput> {
       validator: (value) {
         RegExp _passwordRegex =
             RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$');
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'Please enter some text';
         } else if (value.length < 6) {
           return 'Password should containe atleast 6 characters.';
@@ -184,9 +184,9 @@ class _CreatePasswordInputState extends State<CreatePasswordInput> {
 }
 
 class EmailInput extends StatelessWidget {
-  final TextEditingController emailcontroller;
+  final TextEditingController? emailcontroller;
   const EmailInput({
-    Key key,
+    Key? key,
     this.emailcontroller,
   }) : super(key: key);
 
@@ -205,7 +205,7 @@ class EmailInput extends StatelessWidget {
       validator: (value) {
         RegExp regExp = RegExp(
             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'Please enter some text';
         } else if (!regExp.hasMatch(value)) {
           return 'Please enter a valid email';
