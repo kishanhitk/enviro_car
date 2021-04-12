@@ -115,8 +115,7 @@ class _LoginPageState extends State<LoginPage> {
         usernameController.text,
         passwordController.text,
       );
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('/dashboard', (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil('/base', (route) => false);
     } on Exception catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

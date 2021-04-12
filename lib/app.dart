@@ -1,5 +1,6 @@
 import 'package:enviro_car/consts/colors.dart';
 import 'package:enviro_car/view/bluetooth_page/bluetooth_page.dart';
+import 'package:enviro_car/view/core/base_widget.dart';
 import 'package:enviro_car/view/dashboard_page/dashboard_page.dart';
 import 'package:enviro_car/view/landing_page/landing_page.dart';
 import 'package:enviro_car/view/login_page/login_page.dart';
@@ -31,6 +32,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 ThemeData themeData = ThemeData(
+  primaryColor: kThemeBlueColor,
   inputDecorationTheme: InputDecorationTheme(
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25),
@@ -46,8 +48,8 @@ ThemeData themeData = ThemeData(
       color: Colors.white,
     ),
   ),
-  primaryColor: kThemeBlueColor,
-  canvasColor: kThemeBlueColor,
+  // primaryColor: kThemeBlueColor,
+  // canvasColor: kThemeBlueColor,
   textTheme: GoogleFonts.latoTextTheme(),
 );
 
@@ -58,5 +60,6 @@ Map<String, Widget Function(dynamic)> routes = {
   '/login': (ctx) => LoginPage(),
   '/register': (ctx) => RegisterPage(),
   '/dashboard': (ctx) => DashboardPage(),
-  '/bluetooth': (ctx) => BluetoothPage()
+  '/bluetooth': (ctx) => BluetoothPage(),
+  '/base': (ctx) => BaseWidget()
 };

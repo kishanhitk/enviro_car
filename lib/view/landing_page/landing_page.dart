@@ -2,14 +2,14 @@ import 'package:enviro_car/consts/colors.dart';
 import 'package:enviro_car/main.dart';
 import 'package:enviro_car/utils/media_query.dart';
 import 'package:enviro_car/view/common/widgets/buttons.dart';
-import 'package:enviro_car/view/dashboard_page/dashboard_page.dart';
+import 'package:enviro_car/view/core/base_widget.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (userBox.get('user') != null) {
-      return DashboardPage();
+      return BaseWidget();
     } else {
       return LandingPageView();
     }
