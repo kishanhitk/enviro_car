@@ -19,7 +19,7 @@ dependencies:
   flutter_blue: ^0.8.0
   google_fonts: ^2.0.0
   hive: ^2.0.2
-  intl: ^0.17.0
+  intl: ^0.17.0-nullsafety.2
   path_provider: ^2.0.1
 dev_dependencies:
   flutter_test:
