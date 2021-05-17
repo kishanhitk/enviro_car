@@ -18,25 +18,14 @@ dependencies:
   flutter_bloc: ^7.0.0
   flutter_blue: ^0.8.0
   google_fonts: ^2.0.0
-  hive: ^2.0.2
+  hive: ^2.0.4
   intl: ^0.17.0-nullsafety.2
   path_provider: ^2.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.12.2
-  hive_generator: ^1.0.1
-  flutter_launcher_icons: ^0.9.0
-  flutter_native_splash: ^1.1.7+1
-
-flutter_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/logo.png"
-
-flutter_native_splash:
-  color: "#0165A1"
-  image: assets/img_envirocar_logo_white.png
+  build_runner: ^2.0.1
+  hive_generator: ^1.1.0
 
 flutter:
   uses-material-design: true
